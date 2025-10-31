@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - cumulonimbus_data:/var/lib/postgresql/data
+      - cumulonimbus_data:/var/lib/postgresql/
 
   acaapascon_app:
     container_name: cumulonimbus_app
@@ -24,8 +24,7 @@ services:
       - cumulonimbus_db
     env_file:
       - .env
-
 volumes:
-  acaapascon_data:
+  cumulonimbus_data:
 
 
