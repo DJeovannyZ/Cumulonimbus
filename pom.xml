@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>sv.ues.cpn135</groupId>
 	<artifactId>Cumulonimbus</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Cumulonimbus</name>
 	<description>proyecto asignatura cpn135</description>
 	<url/>

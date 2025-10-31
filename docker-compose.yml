@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  cumulonimbus_db:
+    container_name: cumulonimbus_db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASENAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - cumulonimbus_data:/var/lib/postgresql/data
+
+  acaapascon_app:
+    container_name: cumulonimbus_app
+    build: .
+    image: cumulonimbus:1.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cumulonimbus_db
+    env_file:
+      - .env
+
+volumes:
+  acaapascon_data:
+
+
