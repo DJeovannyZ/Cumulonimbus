@@ -17,4 +17,5 @@ public interface EmployeeService {
 
   boolean deleteEmployee(Long id);
 
+  public List<EmployeeDTO> saveEmployees(List<EmployeeDTO> employeesDTO);
 }

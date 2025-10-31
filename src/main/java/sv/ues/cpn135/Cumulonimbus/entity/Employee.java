@@ -8,10 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
 
   @Id
@@ -28,6 +30,6 @@ public class Employee {
 
   private String email;
 
-  private LocalDate hiringDate;
+  private LocalDate hiringDate = LocalDate.now();
 
 }

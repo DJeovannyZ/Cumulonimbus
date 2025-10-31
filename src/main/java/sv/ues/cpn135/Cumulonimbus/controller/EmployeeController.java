@@ -23,50 +23,56 @@ import sv.ues.cpn135.Cumulonimbus.service.EmployeeService;
 @RequiredArgsConstructor
 public class EmployeeController {
 
-	private final EmployeeService employeeService;
+  private final EmployeeService employeeService;
 
-	@GetMapping
-	public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
-		List<EmployeeDTO> employees = employeeService.getAllEmployees();
-		return ResponseEntity.ok(employees);
-	}
+  @GetMapping
+  public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+    List<EmployeeDTO> employees = employeeService.getAllEmployees();
+    return ResponseEntity.ok(employees);
+  }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Long id) {
-		EmployeeDTO employee = employeeService.getEmployee(id);
-		return ResponseEntity.ok(employee);
-	}
+  @GetMapping("/{id}")
+  public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Long id) {
+    EmployeeDTO employee = employeeService.getEmployee(id);
+    return ResponseEntity.ok(employee);
+  }
 
-	@PostMapping
-	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-		EmployeeDTO created = employeeService.createOrUpdateEmployee(employeeDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(created);
-	}
+  @PostMapping
+  public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    EmployeeDTO created = employeeService.createOrUpdateEmployee(employeeDTO);
+    return ResponseEntity.status(HttpStatus.CREATED).body(created);
+  }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
-		if (employeeDTO.getId() == null) {
-			employeeDTO.setId(id);
-		} else if (!id.equals(employeeDTO.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-		EmployeeDTO updated = employeeService.createOrUpdateEmployee(employeeDTO);
-		return ResponseEntity.ok(updated);
-	}
+  @PutMapping("/{id}")
+  public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+    if (employeeDTO.getId() == null) {
+      employeeDTO.setId(id);
+    } else if (!id.equals(employeeDTO.getId())) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+    EmployeeDTO updated = employeeService.createOrUpdateEmployee(employeeDTO);
+    return ResponseEntity.ok(updated);
+  }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-		employeeService.deleteEmployee(id);
-		return ResponseEntity.noContent().build();
-	}
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+    employeeService.deleteEmployee(id);
+    return ResponseEntity.noContent().build();
+  }
 
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-		String msg = ex.getMessage();
-		if (msg != null && msg.toLowerCase().contains("no existe")) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
-	}
+  @PostMapping
+  public ResponseEntity<List<EmployeeDTO>> createEmployees(@RequestBody List<EmployeeDTO> employeeDTO) {
+    List<EmployeeDTO> createds = employeeService.saveEmployees(employeeDTO);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createds);
+  }
+
+  @ExceptionHandler(RuntimeException.class)
+  public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+    String msg = ex.getMessage();
+    if (msg != null && msg.toLowerCase().contains("no existe")) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
+    }
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
+  }
 
 }
