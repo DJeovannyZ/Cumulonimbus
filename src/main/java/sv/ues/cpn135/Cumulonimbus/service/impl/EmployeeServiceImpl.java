@@ -16,7 +16,7 @@ import sv.ues.cpn135.Cumulonimbus.entity.Employee;
 import sv.ues.cpn135.Cumulonimbus.mapper.EmployeeMapper;
 import sv.ues.cpn135.Cumulonimbus.repository.EmployeeRepository;
 import sv.ues.cpn135.Cumulonimbus.service.EmployeeService;
-import sv.ues.cpn135.Cumulonimbus.service.S3Service;
+import sv.ues.cpn135.Cumulonimbus.service.StorageCloudService;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
   private final EmployeeRepository employeeRepository;
   private final EmployeeMapper employeeMapper;
   private final ObjectMapper objectMapper;
-  private final S3Service s3Service;
+  private final StorageCloudService storageCloudService;
 
   @Override
   public EmployeeDTO createOrUpdateEmployee(EmployeeDTO employeeDTO) {
@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       objectMapper.writeValue(new File(tempFile), employee);
 
       // Subir a S3 automáticamente
-      s3Service.uploadFile("employees/" + employee.getId() + ".json", tempFile);
+      storageCloudService.uploadFile("employees/" + employee.getId() + ".json", tempFile);
     } catch (IOException e) {
       throw new RuntimeException("Error al guardar el empleado en JSON/S3", e);
     }
@@ -101,7 +101,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             objectMapper.writeValue(new File(tempFile), employee);
 
             // Subir a S3 automáticamente
-            s3Service.uploadFile("employees/" + employee.getId() + ".json", tempFile);
+            storageCloudService.uploadFile("employees/" + employee.getId() + ".json", tempFile);
           } catch (IOException e) {
             throw new RuntimeException("Error al guardar el empleado en JSON/S3", e);
           }

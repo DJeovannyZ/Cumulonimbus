@@ -14,7 +14,7 @@ services:
     volumes:
       - cumulonimbus_data:/var/lib/postgresql/
 
-  acaapascon_app:
+  cumulonimbus_app:
     container_name: cumulonimbus_app
     build: .
     image: cumulonimbus:1.0
@@ -24,7 +24,12 @@ services:
       - cumulonimbus_db
     env_file:
       - .env
+    environment:
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GCP_BUCKET_NAME=${GCP_BUCKET_NAME}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+    volumes:
+      - ./cpn135-parcial-2-5b4b913651e3.json:/app/credentials.json
+
 volumes:
   cumulonimbus_data:
-
-

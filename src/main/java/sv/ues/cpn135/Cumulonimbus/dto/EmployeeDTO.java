@@ -25,6 +25,4 @@ public class EmployeeDTO {
 
   private String email;
 
-  private LocalDate hiringDate;
-
 }

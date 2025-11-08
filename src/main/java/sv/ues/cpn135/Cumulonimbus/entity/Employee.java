@@ -30,6 +30,4 @@ public class Employee {
 
   private String email;
 
-  private LocalDate hiringDate = LocalDate.now();
-
 }

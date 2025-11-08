@@ -60,7 +60,7 @@ public class EmployeeController {
     return ResponseEntity.noContent().build();
   }
 
-  @PostMapping
+  @PostMapping("/batch")
   public ResponseEntity<List<EmployeeDTO>> createEmployees(@RequestBody List<EmployeeDTO> employeeDTO) {
     List<EmployeeDTO> createds = employeeService.saveEmployees(employeeDTO);
     return ResponseEntity.status(HttpStatus.CREATED).body(createds);

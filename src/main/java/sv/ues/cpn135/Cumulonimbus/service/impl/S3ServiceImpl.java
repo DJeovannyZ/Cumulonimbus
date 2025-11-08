@@ -3,7 +3,7 @@ package sv.ues.cpn135.Cumulonimbus.service.impl;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
-import sv.ues.cpn135.Cumulonimbus.service.S3Service;
+import sv.ues.cpn135.Cumulonimbus.service.StorageCloudService;
 
 import java.nio.file.Paths;
 
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class S3ServiceImpl implements S3Service {
+public class S3ServiceImpl implements StorageCloudService {
 
   private final S3Client s3Client;
 

@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM eclipse-temurin:17
 WORKDIR /app
 COPY target/Cumulonimbus-1.0.jar /app/Cumulonimbus-1.0.jar
 EXPOSE 8080
