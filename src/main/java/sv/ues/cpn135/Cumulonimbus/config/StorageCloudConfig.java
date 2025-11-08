@@ -17,7 +17,6 @@ import software.amazon.awssdk.services.s3.S3Client;
 @Configuration
 public class StorageCloudConfig {
 
-  @Bean
   public S3Client s3Client(@Value("${AWS_ACCESS_KEY_ID}") String accessKey,
       @Value("${AWS_SECRET_ACCESS_KEY}") String secretKey,
       @Value("${AWS_REGION}") String region) {
